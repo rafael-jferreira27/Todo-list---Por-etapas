@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-// CSS do Bootstrap
+// Importação do CSS do Bootstrap https://getbootstrap.com/docs/4.4/getting-started/webpack/
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 // JavaScript do Bootstrap (com Popper embutido)
