@@ -20,7 +20,7 @@
           <span class="input-group-text"><i class="fa-solid fa-filter"></i></span>
           <!-- v-model liga o select à reatividade (stageFilter) -->
           <select v-model="stageFilter" class="form-select">
-            <option value="">Todas as etapas</option>
+            <option value="">*****</option>
             <!-- Opções geradas a partir de stages (colunas atuais) -->
             <option v-for="s in stages" :key="s.key" :value="s.key">
               {{ s.label }}
@@ -32,7 +32,10 @@
       </div>
       <div class="col-12 col-md-5 text-md-end">
         <!-- Contador total de tarefas -->
-        <span class="badge text-bg-primary">Total: {{ tasks.length }}</span>
+        <!-- <div class="col-12 col-md-5 text-md-end">
+  <span class="badge text-bg-primary">Total: {{ tasks.length }}</span>
+</div> -->
+
       </div>
     </div>
 
@@ -84,7 +87,7 @@
        @dragstart="onDragStart($event, t.id)">
        <span class="flex-grow-1">{{ t.title }}</span>
 
-    <!-- BOTÃO NOVO: Concluir tarefa -->
+    <!-- BOTÃO Concluir tarefa -->
     <button v-if="t.stage !== 'fim'"
         class="btn btn-sm btn-success me-1"
         @click="completeTask(t.id)"
@@ -92,12 +95,13 @@
   <i class="fa-solid fa-check"></i>
 </button>
 
-    <!-- Botão de excluir continua igual -->
-    <button class="btn btn-sm btn-outline-danger"
-            @click="removeTask(t.id)"
-            title="Excluir">
-      <i class="fa-solid fa-trash"></i>
-    </button>
+    <!-- Botão de excluir -->
+    <button class="btn btn-sm btn-outline-secondary btn-trash"
+        @click="removeTask(t.id)"
+        title="Excluir">
+    <i class="fa-solid fa-trash"></i>
+     </button>
+
   </div>
 </li>
 
@@ -105,7 +109,7 @@
 
             <!-- Mensagem quando a coluna está vazia -->
             <p v-if="tasksByStage(stage.key).length === 0" class="text-muted mb-0">
-              Solte tarefas aqui.
+             Sem tarefas
             </p>
           </div>
         </div>
@@ -135,13 +139,13 @@
           <!-- Corpo do modal: adiciona/edita etapas intermediárias -->
           <div class="modal-body">
             <p class="mb-2">
-              Add texto aqui
+              Espaço para configurar etapas
             </p>
 
             <div class="d-flex justify-content-between align-items-center mb-2">
               <strong>Etapas da tarefa</strong>
               <button class="btn btn-sm btn-success" @click="addStageInput">
-                <i class="fa-solid fa-plus me-1"></i>Adicionar etapa
+                <i class="fa-solid fa-plus me-1"></i>Adicionar
               </button>
             </div>
 
@@ -150,9 +154,9 @@
               <div v-for="(s, i) in stageInputs" :key="i" class="input-group">
                 <span class="input-group-text">Etapa {{ i + 1 }}</span>
                 <input v-model="s.label" type="text" class="form-control" placeholder="Ex.: Tarefa 01" />
-                <button class="btn btn-outline-danger" @click="removeStageInput(i)">
-                  <i class="fa-solid fa-trash"></i>
+                <button class="btn btn-outline-secondary btn-trash" @click="removeStageInput(i)">  <i class="fa-solid fa-trash"></i>
                 </button>
+
               </div>
             </div>
 
